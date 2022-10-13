@@ -15,11 +15,11 @@
     <nav class="navbar bg-transparent">
         <div class="container">
           <a class="navbar-brand" href="#">
-            <img src="{static '/templates/img/boralogo2.png'}"  alt="Bootstrap" width="50" height="50" >
+            <img src="{static 'img/boralogo2.png'}"  alt="Bootstrap" width="50" height="50" >
             <span> <b></b> </span>
           </a>
             <div>
-              { % if request.user.is_authenticated % }
+              { % if user.is_authenticated %}
                   Olá, {{ user.get_username }} &nbsp;&nbsp;
                   <a class="btn btn-danger" href="" style="text-decoration:none">Sair</a>
               { % else %  }
