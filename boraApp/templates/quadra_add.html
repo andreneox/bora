@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="{% url 'quadra_add'%}" method="POST" style="margin: auto; width: 400px;"   > {% csrf_token %}
+    <div class="input-group mb-3" >
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1" >Nome</span>
+        </div>
+        <input type="text" class="form-control" placeholder="" name="nome" >
+    </div>
+    <br>
+    <br>
+    <div class="input-group mb-3" >
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1" >Endereco</span>
+        </div>
+        <input type="text" class="form-control" placeholder="" name="endereco" >
+    </div>
+    <br>
+    <br>
+    <div class="input-group mb-3" >
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1" >Esporte</span>
+        </div>
+        <input type="text" class="form-control" placeholder="" name="esporte" >
+    </div>
+    <br>
+    <br>
+    <center>
+        <button class="btn btn-sucess" type="submit" >Salvar</button>
+        <a href="{%url 'quadra' %}" class="btn btn-danger" >Cancelar</a>
+    </center>
+    <br>
+    <br>
+
+
+</form>
+
+
+
+
+
+
+
+{% endblock %}

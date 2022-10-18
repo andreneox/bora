@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
 
+from boraApp.models import Lugar, Agendamento
+
 
 # Create your views here.
 
@@ -93,4 +95,31 @@ def cadastro(request):
                 return redirect  ('home')    
 
 
+
+def quadra_add(request):
+    if request.method == "GET":
+        return render (request, "quadra_add.html")
+    else :
+        nome = request.POST.get ('nome')
+        endereco =  request.POST.get ('endereco')
+        esporte =  request.POST.get ('esporte') 
+
+        lugar = Lugar.objects.filter(nome=nome).first()
+        if lugar :
+            messages.info(request, 'Essa quadra ja esta cadastrada em nosso sistema!')     
+            return redirect ('quadra_add')
+        else :
+            lugar = Lugar(nome=nome, endereco=endereco, esporte=esporte)
+            lugar.save()
+            messages.info (request, 'Quadra cadastrada com sucesso!')
+            return redirect ('quadra')  
+
+
+def quadra (request):
+    lugares = Lugar.objects.all()
+
+    context = {
+        'lugares' : lugares
+    }
+    return render (request, 'quadra.html', context)
                   

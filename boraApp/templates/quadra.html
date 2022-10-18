@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+            <h4>Quadras</h4>
+            <br>
+            {% if messages %}
+            {% for m in messages %}
+            <div class="alert alert-secondary" role="alert" >
+                {{ m }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Endereco</th>
+                        <th>Esporte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lugar in lugares %}
+                    <tr>
+                        <td>{{ lugar.nome }}</td>
+                        <td>{{ lugar.endereco }}</td>
+                        <td>{{ lugar.esporte }}</td>
+                        <td>
+                            <a class="btn btn-warning" href="">Editar</a>
+                            <a class="btn btn-danger" href="" onclick="return confirm ('Confirma a Exclusao?')" >Excluir</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <center>
+                <a class="btn btn-sucess" href="{% url 'quadra_add' %}">Cadastrar Quadra</a>
+                <br><br>
+                <a class="btn btn btn-secondary" href="{% url 'home' %}">Pagina Inicial</a>
+            </center>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
