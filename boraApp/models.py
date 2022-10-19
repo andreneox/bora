@@ -17,3 +17,6 @@ class Agendamento (models.Model):
     localidade = models.ForeignKey(Lugar, on_delete=models.CASCADE)
     inicio = models.DateTimeField()
     fim = models.DateTimeField()
+
+    class Meta:
+        app_label = 'boraApp.models'

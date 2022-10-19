@@ -1,5 +1,6 @@
 from curses.ascii import isdigit
 from distutils.log import info
+from re import A
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
@@ -123,3 +124,30 @@ def quadra (request):
     }
     return render (request, 'quadra.html', context)
                   
+
+def agendar (request):
+    if request.method == "GET":
+        lugares = Lugar.objects.all()
+        context = {
+            
+            }                 
+        return render (request, 'agendamento.html', context)
+    else:
+        quadra = request.POST.get('quadra')
+        quadra = Lugar.objects.get(id=nome)
+        localidade = request.POST.get('localidade')
+        localidade = Lugar.objects.get(id=endereco)
+        inicio = request.POST.get('inicio')
+        fim = request.POST.get('fim')
+
+
+        buscaInicio = Agendamento.objects.filter(inicio=inicio).first()
+        if buscaInicio: 
+            messages.info(request, 'Esse horario ja foi agendado!')
+            return redirect('agendamento')
+        else:
+            agendamento = Agendamento(quadra=quadra, localidade=localidade, inicio=inicio, fim=fim )
+            agendamento.save()
+            messages.info(request,'Agendamento Realizado com Sucesso!')
+            return redirect('agenda')
+
