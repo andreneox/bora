@@ -34,7 +34,7 @@ def login(request):
         return render (request, "login.html")
     else :
         username = request.POST.get('usuario')
-        senha = request.POST.get('senha ')
+        senha = request.POST.get('senha')
 
         user = authenticate(username=username, password=senha)
         if user :
@@ -46,7 +46,7 @@ def login(request):
 
 
 def logout(request):
-    #logout_django (request, user)
+    logout_django (request)
     messages.info(request, "Voce esta deslogado com sucesso.") 
     return redirect("home") 
 
@@ -108,6 +108,7 @@ def cadastro(request):
 
 
 def quadra_add(request):
+    quadras = Lugar.objects.all()
     if request.method == "GET":
         return render (request, "quadra_add.html")
     else :
@@ -139,8 +140,8 @@ def agendar (request):
     if request.method == "GET":
         lugares = Lugar.objects.all()
         context = {
-            
-            }                 
+            "quadras":lugares
+        }                 
         return render (request, 'agendamento_add.html', context)
     else:
         quadra = request.POST.get('quadra')

@@ -11,7 +11,7 @@
         </div>
         <select name="quadra" class="form-control" id="inputGroupSelect01">
             <option selected>Clique Para Selecionar Quadra</option>
-            {% for lugar in lugares %}
+            {% for lugar in quadras %}
             <option value="{{ lugar.id }}"> {{ lugar.nome }} ({{lugar.endereco}})  </option>
             {% endfor %}
         </select>
@@ -22,7 +22,8 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1" >Data: </span>
         </div>
-        <input type="" class="form-control" placeholder="" name="datainicio" >
+        <input type="date" name="data">
+        </select>
     </div>
     <br>
     
@@ -30,16 +31,10 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1" >Horario:</span>
         </div>
-        <input type="text" class="form-control" placeholder="" name="" >
+        <input type="time" name="inicio">
     </div>
     <br>
     
-    <div class="input-group mb-3" >
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1" >Esporte</span>
-        </div>
-        <input type="text" class="form-control" placeholder="" name="esporte" >
-    </div>
     <br>
     
     <center>

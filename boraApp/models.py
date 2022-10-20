@@ -10,5 +10,5 @@ class Lugar(models.Model):
 class Agendamento(models.Model):
     quadra = models.ForeignKey(Lugar, on_delete=models.CASCADE)
     #localidade = models.ForeignKey(Lugar, on_delete=models.CASCADE)
-    inicio = models.DateTimeField()
+    inicio = models.TimeField()
     fim = models.DateTimeField()
