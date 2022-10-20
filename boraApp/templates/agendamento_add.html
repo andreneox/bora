@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<br><br><br>
+<form action="{% url 'agendamento_add' %}" method="POST" style="margin: auto; width: 400px;"   > {% csrf_token %}
+    
+    <!--- INSERIR SELECT da chave estrangeira AULA 05 -->
+
+    <div class="input-group mb-3" >
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1" >Quadra: </span>
+        </div>
+        <select name="quadra" class="form-control" id="inputGroupSelect01">
+            <option selected>Clique Para Selecionar Quadra</option>
+            {% for lugar in lugares %}
+            <option value="{{ lugar.id }}"> {{ lugar.nome }} ({{lugar.endereco}})  </option>
+            {% endfor %}
+        </select>
+    </div>
+    <br>
+    
+    <div class="input-group mb-3" >
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1" >Data: </span>
+        </div>
+        <input type="" class="form-control" placeholder="" name="datainicio" >
+    </div>
+    <br>
+    
+    <div class="input-group mb-3" >
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1" >Horario:</span>
+        </div>
+        <input type="text" class="form-control" placeholder="" name="" >
+    </div>
+    <br>
+    
+    <div class="input-group mb-3" >
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1" >Esporte</span>
+        </div>
+        <input type="text" class="form-control" placeholder="" name="esporte" >
+    </div>
+    <br>
+    
+    <center>
+        <button class="btn btn-success" type="submit" >Salvar</button>
+        <a href="{%url 'quadra' %}" class="btn btn-danger" >Cancelar</a>
+        <br><br>
+        <a class="btn btn-secondary" href="{%url 'home' %}">Pagina Inicial</a>
+    </center>
+    <br>
+    <br>
+
+
+</form>
+
+
+
+
+
+
+
+{% endblock %}

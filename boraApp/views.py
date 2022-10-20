@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
+from django.contrib.auth.decorators import login_required
 
 from boraApp.models import Lugar, Agendamento
 
@@ -19,6 +20,14 @@ from boraApp.models import Lugar, Agendamento
 def home(request):
     return render (request, "home.html")
 
+@login_required(login_url='/login' )
+def lugar(request):
+    lugares = Lugar.objects.all()
+
+    context = {
+        'lugares' : lugares
+    }
+    return render (request, 'quadra.html', context)
 
 def login(request):
     if request.method =='GET':
@@ -37,7 +46,7 @@ def login(request):
 
 
 def logout(request):
-    logout_django (request, user)
+    #logout_django (request, user)
     messages.info(request, "Voce esta deslogado com sucesso.") 
     return redirect("home") 
 
@@ -50,7 +59,7 @@ def cadastro(request):
         nome = request.POST.get('nome')
         sobrenome = request.POST.get('sobrenome')
         email = request.POST.get('email')
-        username = request.POST.get('username')
+        username = request.POST.get('usuario')
         senha = request.POST.get('senha')
         count_nums = 0
         # checagem de numeros
@@ -78,14 +87,14 @@ def cadastro(request):
             elif c.isdigit():
                 count_nums += 1
         if count_alpha == 0 or count_nums == 0 :
-            messages.info ('A senha devbe contar com letras e numeros')
+            messages.info ('A senha deve contar com letras e numeros')
             return redirect('cadastro') 
         user = User.objects.filter(email=email).first()
     if user :
             messages.info(request, 'Esse email de usuario ja esta cadastrado em nosso sistema!') 
             return redirect ('cadastro') 
     else :
-            user = User.objects.filter (username=username).first()
+            user = User.objects.filter(username=username).first()
             if user :
                 messages.info (request, 'Ja existe um usuario com esse username') 
                 return redirect ('cadastro')
@@ -93,7 +102,8 @@ def cadastro(request):
                 user = User.objects.create_user(first_name = nome, last_name = sobrenome, email = email, username = username, password = senha)
                 user.save()
                 messages.info (request, 'Usuario cadastrado com sucesso!')
-                return redirect  ('home')    
+                return redirect  ('home') 
+        #return HttpResponse(username)  
 
 
 
@@ -131,12 +141,12 @@ def agendar (request):
         context = {
             
             }                 
-        return render (request, 'agendamento.html', context)
+        return render (request, 'agendamento_add.html', context)
     else:
         quadra = request.POST.get('quadra')
-        quadra = Lugar.objects.get(id=nome)
+        #quadra = Lugar.objects.get(id=nome)
         localidade = request.POST.get('localidade')
-        localidade = Lugar.objects.get(id=endereco)
+        #localidade = Lugar.objects.get(id=endereco)
         inicio = request.POST.get('inicio')
         fim = request.POST.get('fim')
 
